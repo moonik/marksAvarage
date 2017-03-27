@@ -31,15 +31,12 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny>
     {
         View widok = null;
         //tworzenie nowego wiersza
-        final ModelOceny ocena = listaOcen.get(numerWiersza);
         if (widokDoRecyklingu == null)
         {
             //utworzenie layout na podstawie pliku XML
-            //wybranie konkretnego przycisku radiowego musi zmieniać dane w modelu
             widok = kontekst.getLayoutInflater().inflate(R.layout.activity_mark_buttons, null);
-            ModelOceny modelOceny = getOceny(numerWiersza);
-            ((TextView) widok.findViewById(R.id.listaTextEtykieta)).setText(modelOceny.getNazwa());
             RadioGroup grupaOceny = (RadioGroup) widok.findViewById(R.id.grupaOceny);
+            // przy wcisnieciu przyciska pobiera ocene w wierszu
             grupaOceny.setOnCheckedChangeListener(
                     new RadioGroup.OnCheckedChangeListener()
                     {
@@ -47,8 +44,8 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny>
                         public void onCheckedChanged(RadioGroup group, int checkedId)
                         {
                             RadioButton checkedRadioButton = (RadioButton)group.findViewById(checkedId);
-                            String ocena = checkedRadioButton.getText().toString();
-                            listaOcen.get(numerWiersza).setOcena(Integer.parseInt(ocena));
+                            String ocena = checkedRadioButton.getText().toString(); // pobiera ocene
+                            listaOcen.get(numerWiersza).setOcena(Integer.parseInt(ocena)); // ustawia ocene
                         }
                     }
             );
@@ -68,9 +65,5 @@ public class InteraktywnyAdapterTablicy extends ArrayAdapter<ModelOceny>
         //zaznaczenie odpowiedniego przycisku na podtawie modelu
         //zwrócenie nowego lub zaktualizowanego wiersza listy
         return widok;
-    }
-
-    ModelOceny getOceny(int position) {
-        return (ModelOceny) getItem(position);
     }
 }

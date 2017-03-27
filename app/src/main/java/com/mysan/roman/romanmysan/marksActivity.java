@@ -24,8 +24,9 @@ public class marksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_marks);
 
         Bundle tobolek = getIntent().getExtras();
-        int liczba = tobolek.getInt("amountOfMarks");
+        int liczba = tobolek.getInt("amountOfMarks"); // pobiera liczbe ocen z MainActivity
         final List<ModelOceny> oceny = new ArrayList<>();
+        // tworzenie radio buttonow
         for(int i = 0; i <liczba; i++)
         {
             oceny.add(new ModelOceny("ocena " + (i+1)));
@@ -36,6 +37,7 @@ public class marksActivity extends AppCompatActivity {
         listView.setAdapter(interaktywnyAdapterTablicy);
 
         Button srednia = (Button)findViewById(R.id.srednia);
+        // przy wcisnieciu przyciska liczy sume ocen oraz srednia
         srednia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,10 +48,10 @@ public class marksActivity extends AppCompatActivity {
                 }
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("srednia_ocena", String.valueOf((double) sum / oceny.size()));
+                intent.putExtra("sredniaOcena", String.valueOf((double) sum / oceny.size())); // przekazuje srednia ocene do MainActivity
                 setResult(1,intent);
 
-                marksActivity.this.finish();
+                marksActivity.this.finish(); // zakonc marksActivity
 
             }
         });
