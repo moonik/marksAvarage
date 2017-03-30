@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // pobieranie danych
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextSurName = (EditText) findViewById(R.id.editTextSurName);
         editTextMark = (EditText) findViewById(R.id.editTextMark);
